@@ -1,0 +1,99 @@
+{
+	"name": "systemsdk/docker-nginx-php-laravel",
+	"type": "project",
+	"description": "Docker laravel environment",
+	"keywords": [
+		"Docker",
+		"Nginx",
+		"Php",
+		"Laravel",
+		"Supervisord",
+		"MySQL"
+	],
+	"homepage": "https://github.com/systemsdk/docker-nginx-php-laravel",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Dmitriy Kravtsov",
+			"email": "dmitriy.kravtsov@systemsdk.com",
+			"homepage": "https://github.com/dimadeush",
+			"role": "Developer"
+		}
+	],
+	"require": {
+		"php": "^8.1",
+		"ext-ctype": "*",
+		"ext-iconv": "*",
+		"ext-json": "*",
+		"ext-mbstring": "*",
+		"ext-pdo": "*",
+		"ext-pdo_mysql": "*",
+		"guzzlehttp/guzzle": "^7.5",
+		"jaybizzle/laravel-migrations-organiser": "^6.2",
+		"laravel/framework": "^9.39",
+		"laravel/sanctum": "^3.0",
+		"laravel/tinker": "^2.7",
+		"nwidart/laravel-modules": "^9.0",
+		"spatie/laravel-permission": "^5.9"
+	},
+	"require-dev": {
+		"bamarni/composer-bin-plugin": "^1.8",
+		"barryvdh/laravel-ide-helper": "^2.12",
+		"fakerphp/faker": "^1.9",
+		"laravel/pint": "^1.0",
+		"laravel/sail": "^1.0",
+		"mockery/mockery": "^1.4",
+		"neronmoon/scriptsdev": "^0.1",
+		"nunomaduro/collision": "^6.1",
+		"spatie/laravel-ignition": "^1.0",
+		"roave/security-advisories": "dev-latest"
+	},
+	"config": {
+		"optimize-autoloader": true,
+		"platform": {
+			"php": "8.1.0"
+		},
+		"preferred-install": "dist",
+		"sort-packages": true,
+		"allow-plugins": true
+	},
+	"extra": {
+
+		"laravel": {
+			"dont-discover": []
+		},
+		"scripts-dev": {
+			"post-update-cmd": [
+				"php artisan ide-helper:generate",
+				"php artisan ide-helper:meta"
+			]
+		}
+	},
+	"autoload": {
+		"psr-4": {
+			"App\\": "app/",
+			"Modules\\": "Modules/",
+			"Database\\Factories\\": "database/factories/",
+			"Database\\Seeders\\": "database/seeders/"
+		}
+	},
+
+	"minimum-stability": "dev",
+	"prefer-stable": true,
+	"scripts": {
+		
+		"post-autoload-dump": [
+			"Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+			"@php artisan package:discover --ansi"
+		],
+		"post-root-package-install": [
+			"@php -r \"file_exists('.env') || copy('.env.dev', '.env');\""
+		],
+		"post-create-project-cmd": [
+			"@php artisan key:generate --ansi"
+		]
+	},
+	"support": {
+		"issues": "https://github.com/systemsdk/docker-nginx-php-laravel/issues"
+	}
+}
