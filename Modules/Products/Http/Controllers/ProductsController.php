@@ -10,8 +10,9 @@ use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Modules\Products\Entities\Product;
-use Modules\Stores\Http\Requests\CreateProductRequest;
-use Modules\Stores\Http\Requests\UpdateProductRequest;
+use Modules\Products\Http\Requests\CreateProductRequest;
+use Modules\Products\Http\Requests\UpdateProductRequest;
+
 
 class ProductsController extends Controller
 {

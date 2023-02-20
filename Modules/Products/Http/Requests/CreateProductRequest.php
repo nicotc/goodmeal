@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Stores\Http\Requests;
+namespace Modules\Products\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -18,12 +18,8 @@ class CreateProductRequest extends FormRequest
      *
      * @return array
      */
-
-
     public function rules()
     {
-
- 
         return [
 
             'store_id' => 'required|integer|exists:stores,id',
@@ -32,7 +28,7 @@ class CreateProductRequest extends FormRequest
             'price' => 'required|numeric',
             'discount' => 'required|numeric',
             'stock' => 'required|integer',
-            'image' => 'required|string',
+            'image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:500',
             'category' => 'required|string|in:food,drink,dessert,other',
         ];
 

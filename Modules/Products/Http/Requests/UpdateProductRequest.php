@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Stores\Http\Requests;
+namespace Modules\Products\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -23,7 +23,6 @@ class UpdateProductRequest extends FormRequest
     public function rules()
     {
 
-
         return [
 
             'store_id' => 'integer|exists:stores,id',
@@ -32,7 +31,7 @@ class UpdateProductRequest extends FormRequest
             'price' => 'numeric',
             'discount' => 'numeric',
             'stock' => 'integer',
-            'image' => 'string',
+            'image' => 'mimes:jpg,png,jpeg,gif,svg|max:500',
             'category' => 'string|in:food,drink,dessert,other',
         ];
 
