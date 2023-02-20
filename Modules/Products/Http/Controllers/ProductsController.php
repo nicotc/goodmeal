@@ -11,6 +11,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Modules\Products\Entities\Product;
 use Modules\Stores\Http\Requests\CreateProductRequest;
+use Modules\Stores\Http\Requests\UpdateProductRequest;
 
 class ProductsController extends Controller
 {
@@ -77,7 +78,7 @@ class ProductsController extends Controller
      * @param int $id
      * @return Response
      */
-    public function update(Request $request, $id): JsonResponse
+    public function update(UpdateProductRequest $request, $id): JsonResponse
     {
         try{
             $products = Product::findOrFail($id);

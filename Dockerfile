@@ -49,6 +49,16 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean
 
+
+# Install NodeJS
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -
+RUN apt-get -qqy --no-install-recommends install nodejs
+
+# Create user "node"
+RUN groupadd --gid 1000 node \
+    && useradd --uid 1000 --gid node --shell /bin/bash --create-home node
+
+
 # create document root, fix permissions for www-data user and change owner to www-data
 RUN mkdir -p $APP_HOME/public && \
     mkdir -p /home/$USERNAME && chown $USERNAME:$USERNAME /home/$USERNAME \
