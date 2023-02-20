@@ -2,19 +2,99 @@
     "openapi": "3.0.0",
     "info": {
         "title": "GoodMeal  ApplicationAPI",
+        "contact": {
+            "name": "Nicolás Testagrossa",
+            "email": "nicotestagrossa@gmail.com"
+        },
         "version": "1.0.0"
     },
     "paths": {
+        "/register": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "registro de usuario",
+                "description": "registro de usuario",
+                "operationId": "authRegister",
+                "requestBody": {
+                    "description": "nombre, email y password",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user1@mail.com"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "User1"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "PassWord12345"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "500": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Error"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "User Created Successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/login": {
             "post": {
                 "tags": [
                     "auth"
                 ],
-                "summary": "Sign in",
-                "description": "Login by email, password",
+                "summary": "login de usuario",
+                "description": "login de usuario",
                 "operationId": "authLogin",
                 "requestBody": {
-                    "description": "Pass user credentials",
+                    "description": "email y password",
                     "required": true,
                     "content": {
                         "application/json": {
@@ -27,16 +107,12 @@
                                     "email": {
                                         "type": "string",
                                         "format": "email",
-                                        "example": "user1@mail.com"
+                                        "example": "nico@gmail.com"
                                     },
                                     "password": {
                                         "type": "string",
                                         "format": "password",
-                                        "example": "PassWord12345"
-                                    },
-                                    "persistent": {
-                                        "type": "boolean",
-                                        "example": "true"
+                                        "example": "12345678"
                                     }
                                 },
                                 "type": "object"
@@ -45,15 +121,35 @@
                     }
                 },
                 "responses": {
-                    "422": {
-                        "description": "Wrong credentials response",
+                    "500": {
+                        "description": "Error",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "Sorry, wrong email address or password. Please try again"
+                                            "example": "Error"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "User Logged In Successfully"
+                                        },
+                                        "token": {
+                                            "type": "string",
+                                            "example": "1|2j3h4k5j6h7g8f9d0s1a2z3x4c5v6b7n8m9"
                                         }
                                     },
                                     "type": "object"

@@ -20,6 +20,37 @@ class StoresController extends Controller
 
 
     /**
+     * @OA\Get(
+     * path="/stores",
+     * summary="show all stores",
+     * description="show all stores",
+     * operationId="show all stores",
+     * tags={"Stores"},
+     * security={ {"bearer": {} }},
+     * @OA\Response(
+     * response=200,
+     * description="successful operation",
+     * @OA\JsonContent(
+     * type="array",
+     * @OA\Items(ref="#/components/schemas/Store")
+     * ),
+     * ),
+     * @OA\Response(
+     * response=401,
+     * description="Unauthenticated",
+     * ),
+     * @OA\Response(
+     * response=403,
+     * description="Forbidden"
+     * ),
+     *
+     *   )
+     */
+
+
+
+
+    /**
      * Display a listing of the resource.
      * @return Response
      */
@@ -34,6 +65,61 @@ class StoresController extends Controller
             return $this->getResponse($e->getCode(), 'Unexpected Error', $e->getMessage());
         }
     }
+
+    /**
+     * @OA\Post(
+     * path="/stores",
+     * summary="create new store",
+     * description="create new store",
+     * operationId="create new store",
+     * tags={"Stores"},
+     *
+        * security={ {"bearer": {} }},
+        * @OA\RequestBody(
+        *    required=true,
+        *    description="Pass store data",
+        *    @OA\JsonContent(
+        *       required={"name", "logo", "header", "address", "latitude", "longitude", "withdrawal_schedule", "ratings"},
+        *       @OA\Property(property="name", type="string", example="Store Name"),
+        *       @OA\Property(property="logo", type="string", format="binary"),
+        *       @OA\Property(property="header", type="string", format="binary"),
+        *       @OA\Property(property="address", type="string", example="Store Address"),
+        *       @OA\Property(property="latitude", type="number", format="float", example="12.3456789"),
+        *       @OA\Property(property="longitude", type="number", format="float", example="12.3456789"),
+        *       @OA\Property(property="withdrawal_schedule", type="string", example="Store Withdrawal Schedule"),
+        *       @OA\Property(property="ratings", type="number", format="float", example="12.3456789"),
+        *    ),
+        * ),
+        * @OA\Response(
+        *    response=201,
+        *    description="successful operation",
+        *    @OA\JsonContent(
+        *       @OA\Property(property="message", type="string", example="Store created successfully"),
+        *       @OA\Property(property="data", ref="#/components/schemas/Store"),
+        *    ),
+        * ),
+        * @OA\Response(
+        *    response=400,
+        *    description="Bad Request",
+        *    @OA\JsonContent(
+        *       @OA\Property(property="message", type="string", example="Bad Request"),
+        *       @OA\Property(property="errors", type="object", ref="#/components/schemas/Store"),
+        *    ),
+        * ),
+        * @OA\Response(
+        *    response=401,
+        *    description="Unauthenticated",
+        * ),
+        * @OA\Response(
+        *    response=403,
+        *    description="Forbidden"
+        * ),
+        *
+        * )
+        */
+        
+
+
 
     /**
      * Store a newly created resource in storage.

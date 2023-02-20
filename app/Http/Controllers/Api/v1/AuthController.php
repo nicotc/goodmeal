@@ -14,31 +14,38 @@ class AuthController extends Controller
 {
     /**
      * @OA\Post(
-     * path="/login",
-     * summary="Sign in",
-     * description="Login by email, password",
-     * operationId="authLogin",
+     * path="/register",
+     * summary="registro de usuario",
+     * description="registro de usuario",
+     * operationId="authRegister",
      * tags={"auth"},
      * @OA\RequestBody(
      *    required=true,
-     *    description="Pass user credentials",
+     *    description="nombre, email y password",
      *    @OA\JsonContent(
-     *       required={"email","password"},
+     *       required={"name","email","password"},
      *       @OA\Property(property="email", type="string", format="email", example="user1@mail.com"),
+     *       @OA\Property(property="name", type="string", example="User1"),
      *       @OA\Property(property="password", type="string", format="password", example="PassWord12345"),
-     *       @OA\Property(property="persistent", type="boolean", example="true"),
      *    ),
      * ),
      * @OA\Response(
-     *    response=422,
-     *    description="Wrong credentials response",
+     *    response=500,
+     *    description="Error",
      *    @OA\JsonContent(
-     *       @OA\Property(property="message", type="string", example="Sorry, wrong email address or password. Please try again")
+     *       @OA\Property(property="message", type="string", example="Error")
+     *        )
+     *     ),
+     * @OA\Response(
+     *    response=200,
+     *    description="Success",
+     *    @OA\JsonContent(
+     *       @OA\Property(property="message", type="string", example="User Created Successfully")
      *        )
      *     )
      * )
      */
-    
+
     public function createUser(Request $request)
     {
         try {
@@ -79,10 +86,40 @@ class AuthController extends Controller
         }
     }
 
+
     /**
-     * Login The User
-     * @param Request $request
-     * @return User
+     * @OA\Post(
+     * path="/login",
+     * summary="login de usuario",
+     * description="login de usuario",
+     * operationId="authLogin",
+     * tags={"auth"},
+     * @OA\RequestBody(
+     *   required=true,
+     *  description="email y password",
+     * @OA\JsonContent(
+     *   required={"email","password"},
+     *  @OA\Property(property="email", type="string", format="email", example="nico@gmail.com"),
+     * @OA\Property(property="password", type="string", format="password", example="12345678"),
+     * ),
+     * ),
+     * @OA\Response(
+     *   response=500,
+     * description="Error",
+     * @OA\JsonContent(
+     * @OA\Property(property="message", type="string", example="Error")
+     * )
+     * ),
+     * @OA\Response(
+     *  response=200,
+     * description="Success",
+     * @OA\JsonContent(
+     * @OA\Property(property="message", type="string", example="User Logged In Successfully"),
+     * @OA\Property(property="token", type="string", example="1|2j3h4k5j6h7g8f9d0s1a2z3x4c5v6b7n8m9")
+     * )
+     * )
+     *
+     * )
      */
     public function loginUser(Request $request)
     {

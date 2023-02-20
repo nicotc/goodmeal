@@ -13,6 +13,59 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 class CreateStoreRequest extends FormRequest
 {
     use HttpResponse;
+
+    /**
+     *
+     * @OA\Schema(
+     *  schema="CreateStoreRequest",
+     * type="object",
+     * required={"name", "logo", "header", "address", "latitude", "longitude", "withdrawal_schedule", "ratings"},
+     * @OA\Property(
+     * property="name",
+     * type="string",
+     * example="Store Name",
+     * ),
+     * @OA\Property(
+     * property="logo",
+     * type="string",
+     * format="binary",
+     * ),
+     * @OA\Property(
+     * property="header",
+     * type="string",
+     * format="binary",
+     * ),
+     * @OA\Property(
+     * property="address",
+     * type="string",
+     * example="Store Address",
+     * ),
+     * @OA\Property(
+     * property="latitude",
+     * type="number",
+     * format="float",
+     * example="12.3456789",
+     * ),
+     * @OA\Property(
+     * property="longitude",
+     * type="number",
+     * format="float",
+     * example="12.3456789",
+     * ),
+     *  @OA\Property(
+     * property="withdrawal_schedule",
+     * type="string",
+     * example="Store Withdrawal Schedule",
+     * ),
+     * @OA\Property(
+     * property="ratings",
+     * type="integer",
+     * example="Store Ratings",
+     * ),
+     * )
+     * @return array
+     */
+    
     /**
      * Get the validation rules that apply to the request.
      *

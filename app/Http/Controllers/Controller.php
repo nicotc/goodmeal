@@ -13,6 +13,10 @@ use Illuminate\Routing\Controller as BaseController;
  * @OA\Info(
  *    title="GoodMeal  ApplicationAPI",
  *    version="1.0.0",
+ *   @OA\Contact(
+ *     email="nicotestagrossa@gmail.com",
+ *    name="Nicolás Testagrossa",
+ *  ),
  * )
  */
 
